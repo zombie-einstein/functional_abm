@@ -18,11 +18,11 @@ def model():
         state.value += 1
         return state, descendants, t + 2
 
-    agent_state_1 = AgentState("1")
-    agent_state_2 = AgentState("2")
+    agent_state_1 = AgentState("A")
+    agent_state_2 = AgentState("B")
 
-    agent_1 = simple_agent(0, [], agent_state_1, {})
-    agent_2 = simple_agent(1, [], agent_state_2, {})
+    simple_agent(0, [], agent_state_1, {})
+    simple_agent(1, [], agent_state_2, {})
 
     while not scheduler.finished:
         scheduler.step()
