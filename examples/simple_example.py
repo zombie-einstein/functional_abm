@@ -9,7 +9,14 @@ class AgentState:
 
 
 def model():
+    """
+    Simple model containing 2 agents that increment a counter each time
+    they are updated and then schedule a new event for themselves 2 steps
+    into the future.
 
+    When run the model will print details of the agent and it's state at
+    each step of the simulation
+    """
     scheduler = StepBasedScheduler(20)
 
     @agent(scheduler=scheduler)
@@ -28,4 +35,5 @@ def model():
         scheduler.step()
 
 
-model()
+if __name__ == "__main__":
+    model()
