@@ -18,10 +18,10 @@ class EventBasedScheduler(BaseScheduler):
             processed event)
     """
 
-    def __init__(self, max_t):
+    def __init__(self, max_t, start_time=None):
         self.max_t = max_t
         self.queue = PriorityQueue()
-        self.t = 0
+        self.t = start_time or 0
 
     def submit(self, event):
         """
