@@ -63,4 +63,4 @@ class StepBasedScheduler(BaseScheduler):
             bool: True if no more events remain or the ma number of steps
                 has been reached
         """
-        return self.t >= self.max_t
+        return self.t >= self.max_t or self.t >= len(self.events)
