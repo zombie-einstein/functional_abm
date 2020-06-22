@@ -1,5 +1,5 @@
 from copy import copy
-from typing import Any, Tuple
+from typing import Any
 
 from functional_abm.event import Event
 from functional_abm.schedulers.scheduler import BaseScheduler
@@ -31,7 +31,7 @@ class _AgentNode:
     counter = 0
 
     @staticmethod
-    def f(t, antecedents, state, descendants) -> Tuple:
+    def f(t, antecedents, state, descendants):
         raise NotImplementedError
 
     def __init__(
@@ -53,7 +53,6 @@ class _AgentNode:
         self.descendants = descendants
         self.scheduler = scheduler
 
-        self.prev_state = None
         self.prev_antecedents = None
 
         # Submit first event
@@ -65,7 +64,6 @@ class _AgentNode:
 
         Copies the nodes state and state of antecedents
         """
-        self.prev_state = copy(self.state)
         self.prev_antecedents = copy(self.antecedents)
 
     def update(self, t):
@@ -80,14 +78,9 @@ class _AgentNode:
             t: The current simulated time (i.e. when the update
                 event is called)
         """
-        new_state, new_descendants, next_event_time = self.f(
-            t, self.prev_antecedents, self.prev_state, self.descendants
+        next_event_time = self.f(
+            t, self.prev_antecedents, self.state, self.descendants
         )
-        self.state = new_state
-
-        for k, v in new_descendants.items():
-            self.descendants[k] = v
-
         if next_event_time:
             self.scheduler.submit(Event(next_event_time, self))
 

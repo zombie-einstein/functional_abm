@@ -16,7 +16,7 @@ def model():
     def simple_agent(t, antecedents, state, descendants):
         print(f"Agent: {state.name}, Value: {state.value}, t: {t}")
         state.value += 1
-        return state, descendants, t + 2
+        return t + 2
 
     agent_state_1 = AgentState("A")
     agent_state_2 = AgentState("B")
